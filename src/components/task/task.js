@@ -1,39 +1,28 @@
-import React, {Component} from 'react';
+
 import './task.css'
 
-export default class Task extends Component {
-
-  state = {
-    done: false
-  }
-
-  onTaskClick= ()=>{
-    this.setState(({done})=>{
-      return {
-        done: !done
-      }
-    })
-  }
-
-  render(){
-    const { label, onDeleteTask } = this.props;
-    const { done } = this.state;
-    
-    let className = '';
+const Task = ({ label, onDeleteTask, onToggleDone, done, id, hidden}) => {
+   let className = '';
     if (done) {
-      className += ' description';
+      className += ' completed';
     }
-
+    if (hidden) {
+      className += ' hidden'
+    } 
     return (
+      <li className={className} id={id}>
       <div className="view">
-            <input className="toggle" type="checkbox" onClick={this.onTaskClick} />
+            <input className="toggle" type="checkbox" onClick={onToggleDone} />
             <label>
-              <span className={className}>{label}</span>
+              <span className='description'>{label}</span>
               <span className="created">created 17 seconds ago</span>
             </label>
             <button className="icon icon-edit"></button>
             <button className="icon icon-destroy" onClick={onDeleteTask}></button>
           </div>
+          </li>
     );
   }
-}
+
+
+export default Task;

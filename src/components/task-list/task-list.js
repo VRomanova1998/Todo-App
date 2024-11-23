@@ -1,13 +1,17 @@
 import './task-list.css';
 import Task from '../task/task';
 
-const TaskList = ({ todos, onDeleteTask }) => {
+const TaskList = ({ todos, onDeleteTask, onToggleDone, hidden}) => {
 
   const elements = todos.map((item)=>{
       return (
-        <li className='completed' key={item.id}>
-        <Task label={item.label} onDeleteTask={()=>onDeleteTask(item.id)} />
-      </li>
+        <Task label={item.label} 
+              onDeleteTask={()=>onDeleteTask(item.id)}
+              onToggleDone={()=>onToggleDone(item.id)}
+              done={item.done}
+              key={item.id}
+              id={item.id}
+              hidden={item.hidden}/>
       );
   })
 
