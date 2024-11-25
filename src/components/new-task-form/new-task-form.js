@@ -3,7 +3,6 @@ import './new-task-form.css';
 
 class NewTaskForm extends Component  {
 
-
 state = {
   label: ''
 }  

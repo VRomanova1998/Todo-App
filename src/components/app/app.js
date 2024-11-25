@@ -22,9 +22,10 @@ createTask(label){
         label,
         done: false,
         id: this.generateId++,
-        hidden: false
+        hidden: false,
     }
 }
+
 
 deleteTask = (id) => {
     this.setState(({todoData})=>{
@@ -122,7 +123,7 @@ clearCompleted = () => {
 }
 
 render(){
-    const activeTask = this.state.todoData.filter((item)=>{return !item.done}).length;
+  const countActiveTask = this.state.todoData.filter((item)=>{return !item.done}).length;
         return (
         <section className="todoapp">
           <NewTaskForm  onAddTask={this.addTask} />
@@ -130,7 +131,7 @@ render(){
                 <TaskList todos={this.state.todoData} 
                           onDeleteTask={this.deleteTask}
                           onToggleDone={this.onToggleDone} />
-                <Footer activeTask={activeTask} 
+                <Footer countActiveTask={countActiveTask} 
                         activeButton={this.state.activeButton}
                         displayActiveTask={this.displayActiveTask}
                         displayAllTask={this.displayAllTask}

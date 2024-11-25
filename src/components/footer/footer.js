@@ -1,19 +1,40 @@
+import React, { Component } from 'react';
 import './footer.css';
 import TaskFilter from '../task-filter/tasks-filter';
+import PropTypes from 'prop-types';
 
 
-const Footer = ({activeTask, displayActiveTask, displayAllTask, displayCompletedTask, clearCompleted, activeButton}) => {
-//  console.log(this.props.activeTask)
-  return (
-  <footer className="footer">
-    <span className="todo-count">{activeTask} items left</span>
-   <TaskFilter displayActiveTask={displayActiveTask}
-               displayAllTask={displayAllTask}
-               displayCompletedTask={displayCompletedTask}
-               activeButton={activeButton}/>
-    <button className="clear-completed" onClick={clearCompleted}>Clear completed</button>
-  </footer>
-  );
+export default class Footer extends Component {
+
+static defaultProps = {
+  countActiveTask: 0, 
+  displayActiveTask: () => {}, 
+  displayAllTask: () => {}, 
+  displayCompletedTask: () => {}, 
+  clearCompleted: () => {}, 
+  activeButton: 'All'
+  }
+
+static propTypes = {
+  countActiveTask: PropTypes.number, 
+  displayActiveTask: PropTypes.func, 
+  displayAllTask: PropTypes.func, 
+  displayCompletedTask: PropTypes.func, 
+  clearCompleted: PropTypes.func, 
+  activeButton: PropTypes.string
 }
 
-export default Footer;
+render(){
+  const {countActiveTask, displayActiveTask, displayAllTask, displayCompletedTask, clearCompleted, activeButton} = this.props;
+    return (
+    <footer className="footer">
+      <span className="todo-count">{countActiveTask} items left</span>
+     <TaskFilter displayActiveTask={displayActiveTask}
+                 displayAllTask={displayAllTask}
+                 displayCompletedTask={displayCompletedTask}
+                 activeButton={activeButton}/>
+      <button className="clear-completed" onClick={clearCompleted}>Clear completed</button>
+    </footer>
+    );
+  } 
+}
