@@ -9,7 +9,7 @@ export default class App extends Component {
   generateId = 10;
 
   state = {
-    todoData: [this.createTask('Completed task'), this.createTask('Reading task'), this.createTask('Active task')],
+    todoData: [],
     activeButton: 'All',
   };
 
