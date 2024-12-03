@@ -17,9 +17,6 @@ export default class Footer extends Component {
 
   static propTypes = {
     countActiveTask: PropTypes.number,
-    // displayActiveTask: PropTypes.func,
-    // displayAllTask: PropTypes.func,
-    // displayCompletedTask: PropTypes.func,
     clearCompleted: PropTypes.func,
     activeButton: PropTypes.string,
   };
@@ -29,13 +26,7 @@ export default class Footer extends Component {
     return (
       <footer className="footer">
         <span className="todo-count">{countActiveTask} items left</span>
-        <TaskFilter
-          // displayActiveTask={displayActiveTask}
-          // displayAllTask={displayAllTask}
-          // displayCompletedTask={displayCompletedTask}
-          activeButtonFilter={activeButtonFilter}
-          activeButton={activeButton}
-        />
+        <TaskFilter activeButtonFilter={activeButtonFilter} activeButton={activeButton} />
         <button className="clear-completed" onClick={clearCompleted}>
           Clear completed
         </button>

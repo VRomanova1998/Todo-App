@@ -57,14 +57,14 @@ export default class App extends Component {
 
   activeButtonFilter = (e) => {
     let newArr = [];
-    for (let item of this.state.todoData) { 
+    for (let item of this.state.todoData) {
       let newItem = { ...item };
-      switch (e.target.textContent) { 
-      case 'All':
-        newItem.hidden = false;
-       break;
+      switch (e.target.textContent) {
+        case 'All':
+          newItem.hidden = false;
+          break;
         case 'Active':
-        newItem.hidden = item.done ? true : false;
+          newItem.hidden = item.done ? true : false;
           break;
         case 'Completed':
           newItem.hidden = !item.done ? true : false;
@@ -79,58 +79,6 @@ export default class App extends Component {
       };
     });
   };
-
-  // displayActiveTask = () => {
-  //   let newArr = [];
-  //   for (let item of this.state.todoData) {
-  //     if (item.done) {
-  //       let newItem = { ...item, hidden: true };
-  //       newArr.push(newItem);
-  //     } else {
-  //       let newItem = { ...item, hidden: false };
-  //       newArr.push(newItem);
-  //     }
-  //   }
-  //   this.setState(() => {
-  //     return {
-  //       todoData: newArr,
-  //       activeButton: 'Active',
-  //     };
-  //   });
-  // };
-
-  // displayAllTask = () => {
-  //   let newArr = [];
-  //   for (let item of this.state.todoData) {
-  //     let newItem = { ...item, hidden: false };
-  //     newArr.push(newItem);
-  //   }
-  //   this.setState(() => {
-  //     return {
-  //       todoData: newArr,
-  //       activeButton: 'All',
-  //     };
-  //   });
-  // };
-
-  // displayCompletedTask = () => {
-  //   let newArr = [];
-  //   for (let item of this.state.todoData) {
-  //     if (!item.done) {
-  //       let newItem = { ...item, hidden: true };
-  //       newArr.push(newItem);
-  //     } else {
-  //       let newItem = { ...item, hidden: false };
-  //       newArr.push(newItem);
-  //     }
-  //   }
-  //   this.setState(() => {
-  //     return {
-  //       todoData: newArr,
-  //       activeButton: 'Completed',
-  //     };
-  //   });
-  // };
 
   clearCompleted = () => {
     for (let item of this.state.todoData) {
@@ -151,9 +99,6 @@ export default class App extends Component {
             countActiveTask={countActiveTask}
             activeButton={this.state.activeButton}
             activeButtonFilter={this.activeButtonFilter}
-            // displayActiveTask={this.displayActiveTask}
-            // displayAllTask={this.displayAllTask}
-            // displayCompletedTask={this.displayCompletedTask}
             clearCompleted={this.clearCompleted}
           />
         </section>
