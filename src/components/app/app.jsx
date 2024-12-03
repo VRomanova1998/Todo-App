@@ -55,57 +55,82 @@ export default class App extends Component {
     });
   };
 
-  displayActiveTask = () => {
+  activeButtonFilter = (e) => {
     let newArr = [];
-    for (let item of this.state.todoData) {
-      if (item.done) {
-        let newItem = { ...item, hidden: true };
-        newArr.push(newItem);
-      } else {
-        let newItem = { ...item, hidden: false };
-        newArr.push(newItem);
+    for (let item of this.state.todoData) { 
+      let newItem = { ...item };
+      switch (e.target.textContent) { 
+      case 'All':
+        newItem.hidden = false;
+       break;
+        case 'Active':
+        newItem.hidden = item.done ? true : false;
+          break;
+        case 'Completed':
+          newItem.hidden = !item.done ? true : false;
+          break;
       }
-    }
-    this.setState(() => {
-      return {
-        todoData: newArr,
-        activeButton: 'Active',
-      };
-    });
-  };
-
-  displayAllTask = () => {
-    let newArr = [];
-    for (let item of this.state.todoData) {
-      let newItem = { ...item, hidden: false };
       newArr.push(newItem);
     }
     this.setState(() => {
       return {
         todoData: newArr,
-        activeButton: 'All',
+        activeButton: e.target.textContent,
       };
     });
   };
 
-  displayCompletedTask = () => {
-    let newArr = [];
-    for (let item of this.state.todoData) {
-      if (!item.done) {
-        let newItem = { ...item, hidden: true };
-        newArr.push(newItem);
-      } else {
-        let newItem = { ...item, hidden: false };
-        newArr.push(newItem);
-      }
-    }
-    this.setState(() => {
-      return {
-        todoData: newArr,
-        activeButton: 'Completed',
-      };
-    });
-  };
+  // displayActiveTask = () => {
+  //   let newArr = [];
+  //   for (let item of this.state.todoData) {
+  //     if (item.done) {
+  //       let newItem = { ...item, hidden: true };
+  //       newArr.push(newItem);
+  //     } else {
+  //       let newItem = { ...item, hidden: false };
+  //       newArr.push(newItem);
+  //     }
+  //   }
+  //   this.setState(() => {
+  //     return {
+  //       todoData: newArr,
+  //       activeButton: 'Active',
+  //     };
+  //   });
+  // };
+
+  // displayAllTask = () => {
+  //   let newArr = [];
+  //   for (let item of this.state.todoData) {
+  //     let newItem = { ...item, hidden: false };
+  //     newArr.push(newItem);
+  //   }
+  //   this.setState(() => {
+  //     return {
+  //       todoData: newArr,
+  //       activeButton: 'All',
+  //     };
+  //   });
+  // };
+
+  // displayCompletedTask = () => {
+  //   let newArr = [];
+  //   for (let item of this.state.todoData) {
+  //     if (!item.done) {
+  //       let newItem = { ...item, hidden: true };
+  //       newArr.push(newItem);
+  //     } else {
+  //       let newItem = { ...item, hidden: false };
+  //       newArr.push(newItem);
+  //     }
+  //   }
+  //   this.setState(() => {
+  //     return {
+  //       todoData: newArr,
+  //       activeButton: 'Completed',
+  //     };
+  //   });
+  // };
 
   clearCompleted = () => {
     for (let item of this.state.todoData) {
@@ -125,9 +150,10 @@ export default class App extends Component {
           <Footer
             countActiveTask={countActiveTask}
             activeButton={this.state.activeButton}
-            displayActiveTask={this.displayActiveTask}
-            displayAllTask={this.displayAllTask}
-            displayCompletedTask={this.displayCompletedTask}
+            activeButtonFilter={this.activeButtonFilter}
+            // displayActiveTask={this.displayActiveTask}
+            // displayAllTask={this.displayAllTask}
+            // displayCompletedTask={this.displayCompletedTask}
             clearCompleted={this.clearCompleted}
           />
         </section>

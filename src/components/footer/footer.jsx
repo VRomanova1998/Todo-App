@@ -8,32 +8,32 @@ import './footer.css';
 export default class Footer extends Component {
   static defaultProps = {
     countActiveTask: 0,
-    displayActiveTask: () => {},
-    displayAllTask: () => {},
-    displayCompletedTask: () => {},
+    // displayActiveTask: () => {},
+    // displayAllTask: () => {},
+    // displayCompletedTask: () => {},
     clearCompleted: () => {},
     activeButton: 'All',
   };
 
   static propTypes = {
     countActiveTask: PropTypes.number,
-    displayActiveTask: PropTypes.func,
-    displayAllTask: PropTypes.func,
-    displayCompletedTask: PropTypes.func,
+    // displayActiveTask: PropTypes.func,
+    // displayAllTask: PropTypes.func,
+    // displayCompletedTask: PropTypes.func,
     clearCompleted: PropTypes.func,
     activeButton: PropTypes.string,
   };
 
   render() {
-    const { countActiveTask, displayActiveTask, displayAllTask, displayCompletedTask, clearCompleted, activeButton } =
-      this.props;
+    const { countActiveTask, activeButtonFilter, clearCompleted, activeButton } = this.props;
     return (
       <footer className="footer">
         <span className="todo-count">{countActiveTask} items left</span>
         <TaskFilter
-          displayActiveTask={displayActiveTask}
-          displayAllTask={displayAllTask}
-          displayCompletedTask={displayCompletedTask}
+          // displayActiveTask={displayActiveTask}
+          // displayAllTask={displayAllTask}
+          // displayCompletedTask={displayCompletedTask}
+          activeButtonFilter={activeButtonFilter}
           activeButton={activeButton}
         />
         <button className="clear-completed" onClick={clearCompleted}>
