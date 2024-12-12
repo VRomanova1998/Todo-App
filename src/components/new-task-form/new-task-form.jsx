@@ -27,14 +27,18 @@ class NewTaskForm extends Component {
     return (
       <header className="header">
         <h1>todos</h1>
-        <input
-          className="new-todo"
-          placeholder="What needs to be done?"
-          autoFocus
-          onChange={this.onLabelChange}
-          onKeyDown={this.onSubmit}
-          value={this.state.label}
-        />
+        <form className="new-todo-form">
+          <input
+            className="new-todo"
+            placeholder="What needs to be done?"
+            autoFocus
+            onChange={this.onLabelChange}
+            onKeyDown={this.onSubmit}
+            value={this.state.label}
+          />
+          <input className="new-todo-form__timer" placeholder="Min" autoFocus />
+          <input className="new-todo-form__timer" placeholder="Sec" autoFocus />
+        </form>
       </header>
     );
   }

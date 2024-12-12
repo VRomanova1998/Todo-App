@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import './task.css';
 
+import Timer from '../timer/Timer';
+
 export default class Task extends Component {
   state = {
     timeCreateTask: new Date(),
@@ -27,7 +29,6 @@ export default class Task extends Component {
   };
 
   changeInput = (e) => {
-    console.log();
     this.setState({
       editingLabel: e.target.value,
     });
@@ -75,7 +76,8 @@ export default class Task extends Component {
         <div className="view">
           <input className="toggle" type="checkbox" onClick={onToggleDone} />
           <label>
-            <span className="description">{label}</span>
+            <span className="title">{label}</span>
+            <Timer />
             <span className="created">created {this.state.distanceToNow}</span>
           </label>
           <button className="icon icon-edit" onClick={this.editTask}></button>
