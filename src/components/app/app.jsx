@@ -86,6 +86,16 @@ export default class App extends Component {
     }
   };
 
+  editAdd = (text, id) => {
+    this.setState(({ todoData }) => {
+      const indx = todoData.findIndex((el) => el.id === id);
+      const newArr = todoData.toSpliced(indx, 1, { ...todoData[indx], label: text });
+      return {
+        todoData: newArr,
+      };
+    });
+  };
+
   render() {
     const countActiveTask = this.state.todoData.filter((item) => {
       return !item.done;
@@ -94,7 +104,12 @@ export default class App extends Component {
       <section className="todoapp">
         <NewTaskForm onAddTask={this.addTask} />
         <section className="main">
-          <TaskList todos={this.state.todoData} onDeleteTask={this.deleteTask} onToggleDone={this.onToggleDone} />
+          <TaskList
+            todos={this.state.todoData}
+            onDeleteTask={this.deleteTask}
+            onToggleDone={this.onToggleDone}
+            editAdd={this.editAdd}
+          />
           <Footer
             countActiveTask={countActiveTask}
             activeButton={this.state.activeButton}

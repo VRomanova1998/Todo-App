@@ -8,6 +8,8 @@ export default class Task extends Component {
   state = {
     timeCreateTask: new Date(),
     distanceToNow: 'less than 5 seconds',
+    edit: false,
+    editingLabel: '',
   };
 
   static defaultProps = {
@@ -24,6 +26,30 @@ export default class Task extends Component {
     done: PropTypes.bool,
   };
 
+  changeInput = (e) => {
+    console.log();
+    this.setState({
+      editingLabel: e.target.value,
+    });
+  };
+
+  editSubmit = (e) => {
+    if (e.key === 'Enter') {
+      if (this.state.editingLabel !== '') {
+        this.setState({
+          edit: false,
+        });
+        this.props.editAdd(this.state.editingLabel);
+      }
+    }
+  };
+
+  editTask = () => {
+    this.setState({
+      edit: true,
+    });
+  };
+
   render() {
     const { label, onDeleteTask, onToggleDone, done, id, hidden } = this.props;
 
@@ -33,6 +59,9 @@ export default class Task extends Component {
     }
     if (hidden) {
       className += ' hidden';
+    }
+    if (this.state.edit) {
+      className += ' editing';
     }
 
     setInterval(() => {
@@ -49,9 +78,16 @@ export default class Task extends Component {
             <span className="description">{label}</span>
             <span className="created">created {this.state.distanceToNow}</span>
           </label>
-          <button className="icon icon-edit"></button>
+          <button className="icon icon-edit" onClick={this.editTask}></button>
           <button className="icon icon-destroy" onClick={onDeleteTask}></button>
         </div>
+        <input
+          type="text"
+          className="edit"
+          defaultValue={label}
+          onKeyDown={this.editSubmit}
+          onChange={this.changeInput}
+        />
       </li>
     );
   }

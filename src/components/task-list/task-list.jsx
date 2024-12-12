@@ -10,15 +10,19 @@ export default class TaskList extends Component {
     onDeleteTask: () => {},
     onToggleDone: () => {},
     todos: [],
+    editTask: () => {},
+    editAdd: () => {},
   };
 
   static propTypes = {
     onDeleteTask: PropTypes.func,
     onToggleDone: PropTypes.func,
     todos: PropTypes.arrayOf(PropTypes.object),
+    editTask: PropTypes.func,
+    editAdd: PropTypes.func,
   };
   render() {
-    const { todos, onDeleteTask, onToggleDone } = this.props;
+    const { todos, onDeleteTask, onToggleDone, editAdd } = this.props;
 
     const elements = todos.map((item) => {
       return (
@@ -27,6 +31,7 @@ export default class TaskList extends Component {
           key={item.id}
           onDeleteTask={() => onDeleteTask(item.id)}
           onToggleDone={() => onToggleDone(item.id)}
+          editAdd={(text) => editAdd(text, item.id)}
         />
       );
     });
