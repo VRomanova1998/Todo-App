@@ -13,12 +13,14 @@ export default class App extends Component {
     activeButton: 'All',
   };
 
-  createTask(label) {
+  createTask(label, min, sec) {
     return {
       label,
       done: false,
       id: this.generateId++,
       hidden: false,
+      min,
+      sec,
     };
   }
 
@@ -33,9 +35,9 @@ export default class App extends Component {
     });
   };
 
-  addTask = (text) => {
+  addTask = (text, min, sec) => {
     this.setState(({ todoData }) => {
-      const newTask = this.createTask(text);
+      const newTask = this.createTask(text, min, sec);
       const newTodoData = [...todoData, newTask];
       return {
         todoData: newTodoData,
@@ -109,6 +111,8 @@ export default class App extends Component {
             onDeleteTask={this.deleteTask}
             onToggleDone={this.onToggleDone}
             editAdd={this.editAdd}
+            minuteValue={this.state.minuteValue}
+            secondsValue={this.state.secondsValue}
           />
           <Footer
             countActiveTask={countActiveTask}

@@ -3,14 +3,17 @@ import React, { Component } from 'react';
 import '../task/task.css';
 
 export default class Task extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      countSeconds: 0,
-      timmer: '00:00',
-    };
-    this.startTimer = null;
-  }
+  summarySeconds = Number(this.props.min) * 60 + Number(this.props.sec);
+
+  minuteAmount = this.props.min.length === 1 ? `0${this.props.min}` : `${this.props.min}`;
+  secondsAmount = this.props.sec.length === 1 ? `0${this.props.sec}` : `${this.props.sec}`;
+
+  state = {
+    countSeconds: this.summarySeconds,
+    timmer: `${this.minuteAmount}:${this.secondsAmount}`,
+  };
+
+  startTimer = null;
 
   componentWillUnmount() {
     clearInterval(this.startTimer);
@@ -30,12 +33,19 @@ export default class Task extends Component {
   playTimer = () => {
     let countSeconds = this.state.countSeconds;
     this.startTimer = setInterval(() => {
-      countSeconds++;
-      let newTime = this.toTime(countSeconds);
-      this.setState({
-        countSeconds: countSeconds,
-        timmer: newTime,
-      });
+      if (countSeconds === 0) {
+        this.stopTimer();
+        this.setState({
+          timmer: 'Время вышло',
+        });
+      } else {
+        countSeconds--;
+        let newTime = this.toTime(countSeconds);
+        this.setState({
+          countSeconds: countSeconds,
+          timmer: newTime,
+        });
+      }
     }, 1000);
   };
 

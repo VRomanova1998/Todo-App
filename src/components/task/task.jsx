@@ -52,7 +52,7 @@ export default class Task extends Component {
   };
 
   render() {
-    const { label, onDeleteTask, onToggleDone, done, id, hidden } = this.props;
+    const { label, onDeleteTask, onToggleDone, done, id, hidden, min, sec } = this.props;
 
     let className = '';
     if (done) {
@@ -77,7 +77,7 @@ export default class Task extends Component {
           <input className="toggle" type="checkbox" onClick={onToggleDone} />
           <label>
             <span className="title">{label}</span>
-            <Timer />
+            <Timer min={min} sec={sec} />
             <span className="created">created {this.state.distanceToNow}</span>
           </label>
           <button className="icon icon-edit" onClick={this.editTask}></button>
